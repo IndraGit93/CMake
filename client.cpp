@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -6,6 +7,7 @@
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 #define SOCKET int
 #define INVALID_SOCKET -1
@@ -38,7 +40,7 @@ int main() {
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); // Change this to the server's IP address
     serverAddr.sin_port = htons(12345);                  // Change this port if needed
 
-    if (connect(clientSocket, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr)) == SOCKET_ERROR) {
+    if (connect(clientSocket, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr)) == -1) {
         std::cerr << "Unable to connect to server\n";
         closesocket(clientSocket);
 #ifdef _WIN32

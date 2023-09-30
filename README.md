@@ -1,11 +1,12 @@
 # CMake
 
-
-# on windows to build cmake project, execute following command in directory where CMakeLists.txt is present
-# following command will create makefile for project in build/ directory 
-cmake -G "MinGW Makefiles" -B build -S .
-# following command will execute makefile and build the executables for client and server
-cmake --build build
+# build makefile
+ on windows to build makefile for project, execute following command in directory where CMakeLists.txt is present
+ following command will create makefile for project in build/ directory 
+on windows 'cmake -G "MinGW Makefiles" -B build -S .'      on linux do 'cmake -B build -S .'
+# build executables 
+following command will execute makefile and build the executables for client and server
+On both linux/windows do 'cmake --build build'   or  goto build/  on linux do 'make', on windows do 'mingw32-make'
 
 
 # makefile for windows , if cmake does not works
@@ -25,11 +26,6 @@ $(OBJ_DIR)/server.exe: server.cpp
 $(OBJ_DIR)/client.exe: client.cpp
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
-server.exe: $(OBJ_DIR)/server.exe
-#	copy /Y $< $@
-
-client.exe: $(OBJ_DIR)/client.exe
-#	copy /Y $< $@
 
 clean:
 	rm -rf $(OBJ_DIR) server.exe client.exe

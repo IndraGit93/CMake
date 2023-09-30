@@ -38,7 +38,7 @@ int main() {
     serverAddr.sin_addr.s_addr = INADDR_ANY;
     serverAddr.sin_port = htons(12345); // Change this port if needed
 
-    if (bind(serverSocket, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr)) == SOCKET_ERROR) {
+    if (bind(serverSocket, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr)) == -1) {
         std::cerr << "Bind failed\n";
         closesocket(serverSocket);
 #ifdef _WIN32
@@ -48,7 +48,7 @@ int main() {
     }
 
     // Listen for incoming connections
-    if (listen(serverSocket, SOMAXCONN) == SOCKET_ERROR) {
+    if (listen(serverSocket, SOMAXCONN) == -1) {
         std::cerr << "Listen failed\n";
         closesocket(serverSocket);
 #ifdef _WIN32
